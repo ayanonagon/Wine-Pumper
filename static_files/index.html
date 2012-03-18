@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+
+	<!-- Set the viewport width to device width for mobile -->
+	<meta name="viewport" content="width=device-width" />
+
+	<title>Wine Pumper</title>
+  
+	<!-- Included CSS Files -->
+	<link rel="stylesheet" href="/stylesheets/foundation.css">
+	<link rel="stylesheet" href="/stylesheets/app.css">
+  <script src="/javascripts/app.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="twelve columns">
+        <h2>Welcome to Wine Pumper!</h2>
+        <h5>Record a new wine tasting here</h5>
+        <hr />
+      </div>
+    </div>
+    <div class="row">
+      <div class="eight columns">
+        <form class="nice" action="http://winepumper.appspot.com/wine" method="post">
+          <div class="row">
+            <div class="seven columns">
+              <fieldset>
+                <label for="name"><h5>Wine name</h5>
+                  <p>e.g. "Duckhorn Sauvingon Blanc", "Husch Chenin Blanc"</p>
+                </label>
+                <input type="text" class="input-text" id="name" name="name">
+              </fieldset>
+              <fieldset>
+                <label for="location">
+                  <h5>Appelation</h5>
+                  <p>e.g. "Napa Valley", "Russian River Valley"</p>
+                </label>
+                <input type="text" class="input-text" id="location" name="location">
+              </fieldset>
+              <fieldset>
+                <label for="vintage">
+                  <h5>Vintage</h5>
+                  <p>e.g. "1999", "2008"</p>
+                </label>
+                <select id="vintage" name="year">
+                  <option>1999</option>
+                  <option>2000</option>
+                  <option>2001</option>
+                  <option>2002</option>
+                  <option>2003</option>
+                  <option>2004</option>
+                  <option>2005</option>
+                  <option>2006</option>
+                  <option>2007</option>
+                  <option>2008</option>
+                  <option>2009</option>
+                  <option>2010</option>
+                  <option>2011</option>
+                  <option>2012</option>
+                </select>
+              </fieldset>
+              <fieldset>
+                <label for="notes">
+                  <h5>Remarks</h5>
+                  <p>e.g. "Loved it.", "Notes of rich oak, cherry."</p>
+                </label>
+                <textarea placeholder="This wine was..." id="notes" name="description"></textarea>
+              </fieldset>
+              <fieldset>
+                <label for="rating">
+                  <h5>Rating</h5>
+                  <p>e.g. "Opus 1 = 5 stars", "Boxed wine = 1 star"</p>
+                </label>
+                <select id="rating" name="rating">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option selected>5</option>
+                </select>
+              </fieldset>
+              <input type="submit" value="Submit" class="nice large radius blue button" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+</body>
+
+</html>
