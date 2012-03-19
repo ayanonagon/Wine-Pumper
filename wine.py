@@ -91,6 +91,7 @@ class WineHandler(webapp.RequestHandler):
         wine.description = self.request.get("description")
         wine.location = self.request.get("location")
         db.put(wine)
+        self.redirect('/wine')
         
 application = webapp.WSGIApplication([('/.*', WineHandler)])
 
