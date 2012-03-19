@@ -24,3 +24,7 @@ handlers:
   static_files: static_files/index.html
   upload: static_files/index.html
   expiration: "15m"
+  
+  
+- url: /users
+  script: user.py
