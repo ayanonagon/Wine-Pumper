@@ -1,6 +1,9 @@
 from google.appengine.ext import webapp
 from google.appengine.ext import db
 from google.appengine.ext.webapp.util import run_wsgi_app
+from user_handler import User
+from user_handler import BaseHandler
+
 import logging
 import simplejson
 
@@ -12,8 +15,9 @@ class Wine(db.Model):
     rating = db.IntegerProperty()
     description = db.StringProperty()
     location = db.StringProperty()
+    user = db.ReferenceProperty(User)
     
-class WineHandler(webapp.RequestHandler):
+class WineHandler(BaseHandler):
     
     def get(self):
         """wines = Wine.all()
@@ -46,6 +50,7 @@ class WineHandler(webapp.RequestHandler):
         	<!-- Included CSS Files -->
         	<link rel="stylesheet" href="/stylesheets/foundation.css">
         	<link rel="stylesheet" href="/stylesheets/app.css">
+          <script src="/javascripts/jquery.min.js"></script>
           <script src="/javascripts/app.js"></script>
         </head>
 
@@ -65,6 +70,7 @@ class WineHandler(webapp.RequestHandler):
             rating = wine.rating
             description = wine.description
             location = wine.location
+            user = wine.user.name if wine.user else "Nobody!"
             html_strings.append("""
                 <div class="row">
                       <div class="eight columns">
@@ -74,10 +80,11 @@ class WineHandler(webapp.RequestHandler):
               	          <p>Vintage: %(year)s</p>
               	          <p>Rating: %(rating)s</p>
               	          <p>Remarks: %(description)s</p>
+                          <p>User: %(user)s</p>
                         </div>
                       </div>
                     </div>
-            """ % {"name": name, "year": year, "location": location, "rating": rating, "description": description})
+            """ % {"name": name, "year": year, "location": location, "rating": rating, "description": description, "user": user})
         html_strings.append("""
                 </div>
             </body>
@@ -92,6 +99,8 @@ class WineHandler(webapp.RequestHandler):
         wine.rating = int(self.request.get("rating"))
         wine.description = self.request.get("description")
         wine.location = self.request.get("location")
+        if self.current_user:
+            wine.user = self.current_user
         db.put(wine)
         self.redirect('/wine')
         

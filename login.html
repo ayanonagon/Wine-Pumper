@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 
- <html>
-  <head>
-        <title>Login with Facebook</title>
+<html>
+<head>
+  <title>Login with Facebook</title>
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+<!-- Included CSS Files -->
+<link rel="stylesheet" href="/stylesheets/foundation.css">
+<link rel="stylesheet" href="/stylesheets/app.css">
+<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/submit_put.js" type="text/javascript"></script>
   </head>
   <body>
 
-    {% if current_user %}
-      <p><a href="{{ current_user.profile_url }}"><img src="http://graph.facebook.com/{{ current_user.id }}/picture?type=square"/></a></p>
-      <p>Hello, {{ current_user.name|escape }}</p>
-    {% endif %}
+    <div class="container">
+      <div class="row">
+        <div class="twelve columns"
+          {% if current_user %}
+            <p><a href="{{ current_user.profile_url }}"><img src="http://graph.facebook.com/{{ current_user.id }}/picture?type=square"/></a></p>
+            <p>Hello, {{ current_user.name|escape }}</p>      
+            {% if not current_user.phone_number %}
+            <div id = "wine_form">
+                        <label for="phone_number"><h5>Your Favorite Wine</h5>
+                        <p>Hey! We still need to know your favorite wine! e.g. "Duckhorn Sauvingon Blanc", "Husch Chenin Blanc"</p>
+                        </label>
+                        <input type="text" class="input-text nice" id="phone_number" name="phone_number">
+                        <a href='#' class="nice medium radius blue button" id="name_button">Submit</a>
+
+            </div>
+            {% endif %}
+            <a href="/">Start adding wines!</a>
+          {% endif %}
 
     <div id="fb-root"></div>
     <script>
@@ -30,5 +52,10 @@
     {% if not current_user %}
     <div class="fb-login-button">Login with Facebook</div>
     {% endif %}
+        </div>
+      </div>
+    </div>
+      <script>
+        
   </body>
 </html>
